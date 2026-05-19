@@ -1,61 +1,79 @@
 # Wazuh Windows SOC Lab
 
-## 1. Project Status
+## Project Status
 
 **In Progress**
 
-This lab is currently working. I have connected a Windows endpoint to Wazuh and captured failed login alerts. I am still adding more detection scenarios and documentation.
+This project is a home SOC-style lab using Wazuh to monitor a Windows endpoint and test different detection scenarios.
+
+The lab is currently functional. A Windows endpoint has been connected to Wazuh, failed login alerts have been captured, and additional detection scenarios are being added.
 
 ---
 
-## 2. What This Project Is
+## Project Overview
 
-This is a home cyber security lab using **Wazuh SIEM** to monitor a Windows 11 computer.
+This project demonstrates practical blue team and SOC analyst skills using a Wazuh SIEM lab.
 
-The goal is to practise basic SOC analyst skills, including:
+The goal is to practise:
 
-- Monitoring endpoint activity
-- Reviewing security alerts
-- Analysing failed login attempts
-- Documenting findings
+- SIEM setup and navigation
+- Endpoint monitoring
+- Windows log analysis
+- Security alert investigation
+- Detection scenario testing
+- SOC-style documentation
 
 ---
 
-## 3. Tools Used
+## Lab Architecture
+
+```text
+Windows 11 Endpoint
+        ↓
+Wazuh Agent
+        ↓
+Wazuh Manager
+        ↓
+Wazuh Dashboard / Threat Hunting
+```
+
+---
+
+## Tools Used
 
 | Tool | Purpose |
 |---|---|
-| Wazuh | SIEM/security monitoring platform |
-| VirtualBox | Runs the Wazuh virtual machine |
-| Windows 11 | Endpoint being monitored |
-| Wazuh Agent | Sends Windows logs to Wazuh |
-| Windows Event Logs | Source of login/security events |
+| Wazuh | SIEM and security monitoring platform |
+| VirtualBox | Running the Wazuh virtual machine |
+| Windows 11 | Monitored endpoint |
+| Wazuh Agent | Forwarding endpoint logs to Wazuh |
+| Windows Event Logs | Source of authentication and system events |
 
 ---
 
-## 4. What I Have Done So Far
+## Detection Scenarios
 
-- Imported and started the Wazuh OVA in VirtualBox
-- Opened the Wazuh dashboard locally
-- Installed the Wazuh agent on my Windows machine
-- Configured the agent to connect to the Wazuh manager
-- Confirmed the endpoint appears as active in Wazuh
-- Purposely entered the wrong Windows password
-- Found the failed login alerts in Wazuh Threat Hunting
+| Scenario | Status | Description | Report |
+|---|---|---|---|
+| Failed Windows Login Detection | Completed | Generated incorrect Windows login attempts and confirmed Wazuh detected authentication failure alerts. | [View Report](reports/failed-login-detection.md) |
+| File Integrity Monitoring | Planned | Testing whether Wazuh detects changes to monitored files on the Windows endpoint. | Coming soon |
+| Agent / Service Monitoring | Planned | Reviewing Wazuh agent and Windows service-related events. | Coming soon |
 
 ---
 
-## 5. Detection Test: Failed Windows Login
+## Completed Scenario: Failed Windows Login Detection
 
-To test the lab, I intentionally entered an incorrect Windows password multiple times.
+The first detection scenario tested whether Wazuh could detect failed Windows login attempts.
 
-Wazuh detected this and created alerts with the description:
+To generate the event, I intentionally entered an incorrect Windows password multiple times on the monitored endpoint.
+
+Wazuh detected the activity and generated alerts with the rule description:
 
 ```text
 Logon Failure - Unknown user or bad password
 ```
 
-### Alert Details
+### Alert Summary
 
 | Field | Value |
 |---|---|
@@ -67,40 +85,58 @@ Logon Failure - Unknown user or bad password
 | Rule Level | 5 |
 | Rule ID | 60122 |
 
+Full write-up: [Failed Windows Login Detection Report](reports/failed-login-detection.md)
+
 ---
 
-## 6. Screenshots
+## Screenshots
 
 ### Agent Connected
 
-![Agent Active](screenshots/01-agent-active.png)
+![Agent Active](screenshots/failed-login/01-agent-active.png)
 
 ### Threat Hunting Dashboard
 
-![Threat Hunting Dashboard](screenshots/02-threat-hunting-dashboard.png)
+![Threat Hunting Dashboard](screenshots/failed-login/02-threat-hunting-dashboard.png)
 
 ### Failed Login Alerts
 
-![Failed Login Alerts](screenshots/03-failed-login-alerts.png)
+![Failed Login Alerts](screenshots/failed-login/03-failed-login-alerts.png)
 
-### Alert Details
+### Alert Document Details
 
-![Alert Details](screenshots/04-alert-document-details.png)
-
----
-
-## 7. What This Shows
-
-This project shows that I can set up a SIEM lab, connect a Windows endpoint, generate a security event, and investigate the alert inside Wazuh.
-
-This is relevant to SOC analyst work because failed login attempts can indicate password guessing, brute-force attempts, or unauthorised access attempts.
+![Alert Details](screenshots/failed-login/04-alert-document-details.png)
 
 ---
 
-## 8. Next Steps
+## What This Project Demonstrates
 
-- Add a full incident report
-- Test more failed login attempts as a brute-force simulation
-- Explore file integrity monitoring
-- Explore vulnerability detection
-- Add more screenshots and notes
+This project demonstrates that I can:
+
+- Deploy a basic SIEM lab environment
+- Connect a Windows endpoint to a SIEM
+- Generate controlled security events
+- Investigate alerts in Wazuh Threat Hunting
+- Interpret alert metadata such as rule ID, rule level, agent name, and event details
+- Document findings in a clear SOC-style format
+
+---
+
+## Limitations
+
+This project is being completed in a local lab environment. The detected activity was intentionally generated for testing and was not caused by a real attacker.
+
+The current completed detection scenario focuses on failed local Windows login attempts. Additional scenarios will be added to make the lab more complete.
+
+---
+
+## Next Steps
+
+Planned improvements:
+
+- Add a full File Integrity Monitoring detection scenario
+- Add screenshots for File Integrity Monitoring
+- Add a File Integrity Monitoring report
+- Add an Agent / Service Monitoring report
+- Test repeated failed logins as a brute-force-style simulation
+- Improve documentation and screenshots as the lab develops
