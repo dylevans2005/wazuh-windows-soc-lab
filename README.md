@@ -63,9 +63,9 @@ Wazuh Dashboard / Threat Hunting
 
 ## Completed Scenario: Failed Windows Login Detection
 
-The first detection scenario tested whether Wazuh could detect failed Windows login attempts.
+The first detection scenario tested whether Wazuh could detect failed Windows login attempts from a monitored Windows endpoint.
 
-To generate the event, I intentionally entered an incorrect Windows password multiple times on the monitored endpoint.
+To generate the event, I intentionally entered an incorrect Windows password multiple times.
 
 Wazuh detected the activity and generated alerts with the rule description:
 
@@ -126,7 +126,7 @@ This project demonstrates that I can:
 
 This project is being completed in a local lab environment. The detected activity was intentionally generated for testing and was not caused by a real attacker.
 
-The current completed detection scenario focuses on failed local Windows login attempts. Additional scenarios will be added to make the lab more complete.
+The current completed detection scenario focuses on failed local Windows login attempts. Additional detection scenarios will be added to make the lab more complete.
 
 ---
 
@@ -134,7 +134,7 @@ The current completed detection scenario focuses on failed local Windows login a
 
 Planned improvements:
 
-- Add a full File Integrity Monitoring detection scenario
+- Add a File Integrity Monitoring detection scenario
 - Add screenshots for File Integrity Monitoring
 - Add a File Integrity Monitoring report
 - Add an Agent / Service Monitoring report
